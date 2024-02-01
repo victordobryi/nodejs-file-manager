@@ -1,8 +1,9 @@
 import { stdin, stdout, exit } from 'process';
+import { getGreetingMsg } from './utils/getGreetingMsg.js';
 
 process.on('message', (message) => {
   if (message.type === 'welcome') {
-    stdout.write(`Welcome to the File Manager, ${message.userName}!\n`);
+    stdout.write(`${getGreetingMsg(message.userName)}\n`);
   }
 });
 
