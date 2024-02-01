@@ -12,6 +12,10 @@ try {
 
   const cp = fork(appIteratorPath, null);
   cp.send({ type: 'welcome', userName });
+
+  cp.on('exit', () => {
+    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+  });
 } catch (error) {
   throw new Error(error.message);
 }

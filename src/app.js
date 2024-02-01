@@ -2,7 +2,7 @@ import { stdin, stdout, exit } from 'process';
 
 process.on('message', (message) => {
   if (message.type === 'welcome') {
-    console.log(`Welcome to the File Manager, ${message.userName}!`);
+    stdout.write(`Welcome to the File Manager, ${message.userName}!\n`);
   }
 });
 
