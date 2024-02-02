@@ -11,6 +11,16 @@ process.on('message', (message) => {
 export const app = (chunk) => {
   try {
     const chunkStringified = chunk.toString();
+    const formatedChunk = chunkStringified.trim();
+    console.log(formatedChunk);
+    switch (formatedChunk) {
+      case 'Accept':
+        console.log('Correct operation');
+        break;
+      default:
+        stdout.write('Invalid Input\n');
+        break;
+    }
     if (chunkStringified.includes('.exit')) exit(0);
     stdout.write(`Received from master process: ${chunk}${getCurrentPathMsg()}`);
   } catch (error) {
