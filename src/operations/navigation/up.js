@@ -1,3 +1,4 @@
 import path from 'path';
+import { chdir } from 'process';
 
-export const up = () => path.resolve(process.cwd(), '..');
+export const up = () => chdir(path.resolve(process.cwd(), '..'));
