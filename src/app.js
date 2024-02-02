@@ -5,6 +5,7 @@ import { up } from './operations/navigation/up.js';
 import { cd } from './operations/navigation/cd.js';
 import ReadLine from 'readline';
 import { getByeMsg } from './utils/getByeMsg.js';
+import { ls } from './operations/navigation/ls.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,
@@ -16,25 +17,27 @@ export const app = async (username) => {
     stdout.write(`${getGreetingMsg(username)}${getCurrentPathMsg()}`);
   }
   try {
-    readline.on('line', (line) => {
+    readline.on('line', async (line) => {
       const command = line.split(' ')[0];
       const otherArgs = line.split(' ').slice(1).join(' ');
       switch (command) {
         case 'up':
           up();
-          stdout.write(getCurrentPathMsg());
           break;
         case 'cd':
           cd(otherArgs);
-          stdout.write(getCurrentPathMsg());
+          break;
+        case 'ls':
+          await ls();
           break;
         case '.exit':
           stdout.write(getByeMsg(username));
           exit(0);
         default:
           stdout.write('Invalid Input\n');
-          break;
+          return;
       }
+      stdout.write(getCurrentPathMsg());
     });
 
     readline.on('close', () => {
