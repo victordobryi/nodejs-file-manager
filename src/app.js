@@ -13,6 +13,7 @@ import { rn } from './operations/fs/rn.js';
 import { cp } from './operations/fs/cp.js';
 import { mv } from './operations/fs/mv.js';
 import { rm } from './operations/fs/rm.js';
+import { os } from './operations/os/index.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,
@@ -54,6 +55,9 @@ export const app = async (username) => {
           break;
         case 'rm':
           await rm(otherArgs);
+          break;
+        case 'os':
+          await os(otherArgs);
           break;
         case '.exit':
           stdout.write(getByeMsg(username));
