@@ -5,3 +5,4 @@ export const SOMETHING_WRONG = 'Something went wrong';
 export const FILE_NOT_FOUND = 'No such file or directory';
 export const INVALID_INPUT = '\x1b[31mInvalid Input\x1b[0m\n';
 export const FILE_EXIST = 'File is already exist';
+export const DIR_NOT_FILE = 'Path is a directory, not a file';
