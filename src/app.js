@@ -11,6 +11,7 @@ import { INVALID_INPUT } from './constants/index.js';
 import { add } from './operations/fs/add.js';
 import { rn } from './operations/fs/rn.js';
 import { cp } from './operations/fs/cp.js';
+import { mv } from './operations/fs/mv.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,
@@ -46,6 +47,9 @@ export const app = async (username) => {
           break;
         case 'cp':
           await cp(otherArgs);
+          break;
+        case 'mv':
+          await mv(otherArgs);
           break;
         case '.exit':
           stdout.write(getByeMsg(username));
