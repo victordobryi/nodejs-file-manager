@@ -4,7 +4,7 @@ import path from 'path';
 import { coloredLog } from '../../utils/getColoredLog.js';
 import { FILE_NOT_FOUND } from '../../constants/index.js';
 
-export const cp = async (props) => {
+export const cp = async (props, shouldLog = true) => {
   try {
     const [filePath, newFolderPath] = props.split(' ');
 
@@ -37,13 +37,19 @@ export const cp = async (props) => {
     readableStream.pipe(writableStream);
 
     writableStream.on('finish', () => {
-      coloredLog(`File copied successfully from ${filePath} to ${newFilePath}`, 'green');
+      if (shouldLog) {
+        coloredLog(`File copied successfully from ${filePath} to ${newFilePath}`, 'green');
+      }
     });
 
     writableStream.on('error', (error) => {
       coloredLog(`Error copying file: ${error.message}`, 'red');
     });
   } catch (error) {
-    coloredLog(FILE_NOT_FOUND, 'red');
+    if (shouldLog) {
+      coloredLog(FILE_NOT_FOUND, 'red');
+    } else {
+      throw new Error(error.message);
+    }
   }
 };
