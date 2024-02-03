@@ -15,6 +15,7 @@ import { mv } from './operations/fs/mv.js';
 import { rm } from './operations/fs/rm.js';
 import { os } from './operations/os/index.js';
 import { hash } from './operations/hash/index.js';
+import { compress } from './operations/zip/compress.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,
@@ -62,6 +63,9 @@ export const app = async (username) => {
           break;
         case 'hash':
           await hash(otherArgs);
+          break;
+        case 'compress':
+          await compress(otherArgs);
           break;
         case '.exit':
           stdout.write(getByeMsg(username));
