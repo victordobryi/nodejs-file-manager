@@ -6,6 +6,8 @@ import { cd } from './operations/navigation/cd.js';
 import ReadLine from 'readline';
 import { getByeMsg } from './utils/getByeMsg.js';
 import { ls } from './operations/navigation/ls.js';
+import { cat } from './operations/fs/cat.js';
+import { INVALID_INPUT } from './constants/index.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,
@@ -30,21 +32,23 @@ export const app = async (username) => {
         case 'ls':
           await ls();
           break;
+        case 'cat':
+          await cat(otherArgs);
+          break;
         case '.exit':
           stdout.write(getByeMsg(username));
           exit(0);
         default:
-          stdout.write('Invalid Input\n');
+          stdout.write(INVALID_INPUT);
+          stdout.write(getCurrentPathMsg());
           return;
       }
       stdout.write(getCurrentPathMsg());
     });
-
     readline.on('close', () => {
       stdout.write(getByeMsg(username));
-      stdout.write(getCurrentPathMsg());
     });
   } catch (error) {
-    throw new Error(error.message);
+    coloredLog(error.message, 'red');
   }
 };

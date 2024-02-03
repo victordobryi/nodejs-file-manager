@@ -1,5 +1,6 @@
 import path from 'path';
 import { coloredLog } from '../../utils/getColoredLog.js';
+import { FILE_NOT_FOUND } from '../../constants/index.js';
 
 export const cd = (dirr) => {
   try {
@@ -7,6 +8,6 @@ export const cd = (dirr) => {
     const newPath = path.resolve(currentPath, dirr);
     process.chdir(newPath);
   } catch (error) {
-    coloredLog('No such file or directory', 'red');
+    coloredLog(FILE_NOT_FOUND, 'red');
   }
 };

@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { coloredLog } from '../../utils/getColoredLog.js';
+import { SOMETHING_WRONG } from '../../constants/index.js';
 
 export const ls = async () => {
   try {
@@ -24,7 +25,7 @@ export const ls = async () => {
     const structedData = (await Promise.all(promises)).filter(Boolean);
     console.table(structedData);
   } catch (error) {
-    coloredLog('Something went wrong', 'red');
+    coloredLog(SOMETHING_WRONG, 'red');
     console.error(error.message);
   }
 };
