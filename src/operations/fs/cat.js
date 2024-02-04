@@ -1,12 +1,11 @@
-import fs from 'fs';
+import { createReadStream } from 'fs';
 import { stdout } from 'process';
-import { coloredLog } from '../../utils/getColoredLog.js';
+import { coloredLog, getCurrentPathMsg } from '../../utils/index.js';
 import { FILE_NOT_FOUND } from '../../constants/index.js';
-import { getCurrentPathMsg } from '../../utils/getCurrentPathMsg.js';
 
 export const cat = async (path) => {
   try {
-    const fileStream = fs.createReadStream(path);
+    const fileStream = createReadStream(path);
     fileStream.on('end', () => {
       stdout.write(getCurrentPathMsg());
     });

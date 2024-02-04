@@ -1,16 +1,16 @@
-import { FILE_NOT_FOUND } from '../../constants/index.js';
-import { createBrotliDecompress } from 'zlib';
-import { pipeline } from 'stream/promises';
+import { stat } from 'fs/promises';
 import { createReadStream, createWriteStream } from 'fs';
+import { pipeline } from 'stream/promises';
+import { createBrotliDecompress } from 'zlib';
+import { FILE_NOT_FOUND } from '../../constants/index.js';
 import { coloredLog } from '../../utils/getColoredLog.js';
-import fs from 'fs/promises';
 
 export const decompress = async (props) => {
   try {
     const [sourcePath, destinationPath] = props.split(' ');
 
     try {
-      await fs.stat(destinationPath);
+      await stat(destinationPath);
       coloredLog(`File already exists at ${destinationPath}`, 'red');
       return;
     } catch (err) {}

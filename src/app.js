@@ -1,22 +1,12 @@
-import { exit, stdin, stdout } from 'process';
-import { getGreetingMsg } from './utils/getGreetingMsg.js';
-import { getCurrentPathMsg } from './utils/getCurrentPathMsg.js';
-import { up } from './operations/navigation/up.js';
-import { cd } from './operations/navigation/cd.js';
 import ReadLine from 'readline';
-import { getByeMsg } from './utils/getByeMsg.js';
-import { ls } from './operations/navigation/ls.js';
-import { cat } from './operations/fs/cat.js';
-import { INVALID_INPUT } from './constants/index.js';
-import { add } from './operations/fs/add.js';
-import { rn } from './operations/fs/rn.js';
-import { cp } from './operations/fs/cp.js';
-import { mv } from './operations/fs/mv.js';
-import { rm } from './operations/fs/rm.js';
+import { exit, stdin, stdout } from 'process';
+import { getCurrentPathMsg, getByeMsg, getGreetingMsg } from './utils/index.js';
+import { cd, ls, up } from './operations/navigation/index.js';
+import { add, cat, cp, mv, rm, rn } from './operations/fs/index.js';
 import { os } from './operations/os/index.js';
 import { hash } from './operations/hash/index.js';
-import { compress } from './operations/zip/compress.js';
-import { decompress } from './operations/zip/decompress.js';
+export { compress, decompress } from './operations/zip/index.js';
+import { INVALID_INPUT } from './constants/index.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,

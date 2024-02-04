@@ -1,5 +1,5 @@
-import fs from 'fs';
-import fsProm from 'fs/promises';
+import { createReadStream, createWriteStream } from 'fs';
+import { access, mkdir } from 'fs/promises';
 import path from 'path';
 import { coloredLog } from '../../utils/getColoredLog.js';
 import { FILE_NOT_FOUND } from '../../constants/index.js';
@@ -11,28 +11,28 @@ export const cp = async (props, shouldLog = true) => {
     const fileName = path.basename(filePath);
 
     try {
-      await fsProm.access(newFolderPath);
+      await access(newFolderPath);
     } catch (error) {
-      await fsProm.mkdir(newFolderPath);
+      await mkdir(newFolderPath);
     }
 
     const newFilePath = path.join(newFolderPath, fileName);
 
-    await fsProm.access(filePath);
+    await access(filePath);
 
     try {
-      await fsProm.stat(newFilePath);
+      await access(newFilePath);
       coloredLog(`File already exists at ${newFilePath}`, 'red');
       return;
     } catch (err) {}
 
-    const readableStream = fs.createReadStream(filePath);
+    const readableStream = createReadStream(filePath);
 
     readableStream.on('error', (error) => {
       coloredLog(`Error copying file: ${error.message}`, 'red');
     });
 
-    const writableStream = fs.createWriteStream(newFilePath);
+    const writableStream = createWriteStream(newFilePath);
 
     readableStream.pipe(writableStream);
 

@@ -1,16 +1,16 @@
-import { coloredLog } from '../../utils/getColoredLog.js';
-import fs from 'fs';
-import fsProm from 'fs/promises';
+import { createReadStream } from 'fs';
+import { stat } from 'fs/promises';
 import crypto from 'crypto';
+import { coloredLog } from '../../utils/getColoredLog.js';
 import { DIR_NOT_FILE } from '../../constants/index.js';
 
 export const hash = async (filePath) => {
   try {
-    const stats = await fsProm.stat(filePath);
+    const stats = await stat(filePath);
     const isExist = stats.isDirectory();
 
     if (!isExist) {
-      const readStream = fs.createReadStream(filePath);
+      const readStream = createReadStream(filePath);
 
       const hash = crypto.createHash('sha256');
 
