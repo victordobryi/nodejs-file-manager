@@ -1,6 +1,6 @@
 import ReadLine from 'readline';
 import { exit, stdin, stdout } from 'process';
-import { getCurrentPathMsg, getByeMsg, getGreetingMsg } from './utils/index.js';
+import { getCurrentPathMsg, getByeMsg, getGreetingMsg, coloredLog } from './utils/index.js';
 import { cd, ls, up } from './operations/navigation/index.js';
 import { add, cat, cp, mv, rm, rn } from './operations/fs/index.js';
 import { os } from './operations/os/index.js';
