@@ -1,8 +1,8 @@
 import { createReadStream, createWriteStream } from 'fs';
 import { access, mkdir } from 'fs/promises';
 import path from 'path';
-import { coloredLog } from '../../utils/getColoredLog.js';
 import { FILE_NOT_FOUND } from '../../constants/index.js';
+import { isExist, coloredLog } from '../../utils/index.js';
 
 export const cp = async (props, shouldLog = true) => {
   try {
@@ -20,11 +20,9 @@ export const cp = async (props, shouldLog = true) => {
 
     await access(filePath);
 
-    try {
-      await access(newFilePath);
-      coloredLog(`File already exists at ${newFilePath}`, 'red');
+    if (await isExist(newFilePath)) {
       return;
-    } catch (err) {}
+    }
 
     const readableStream = createReadStream(filePath);
 

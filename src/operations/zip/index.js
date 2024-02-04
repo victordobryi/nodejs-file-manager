@@ -1,20 +1,19 @@
 import { stat } from 'fs/promises';
-import { coloredLog } from '../../utils/getColoredLog.js';
 import { createBrotliDecompress, createBrotliCompress } from 'zlib';
 import { FILE_NOT_FOUND } from '../../constants/index.js';
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
+import { isExist, coloredLog } from '../../utils/index.js';
 
 export const brotli = async (props, action) => {
   try {
     const [sourcePath, destinationPath] = props.split(' ');
 
     await stat(sourcePath);
-    try {
-      await stat(destinationPath);
-      coloredLog(`File already exists at ${destinationPath}`, 'red');
+
+    if (await isExist(destinationPath)) {
       return;
-    } catch (err) {}
+    }
 
     const source = createReadStream(sourcePath);
     const destination = createWriteStream(destinationPath);
