@@ -5,8 +5,8 @@ import { cd, ls, up } from './operations/navigation/index.js';
 import { add, cat, cp, mv, rm, rn } from './operations/fs/index.js';
 import { os } from './operations/os/index.js';
 import { hash } from './operations/hash/index.js';
-export { compress, decompress } from './operations/zip/index.js';
 import { INVALID_INPUT } from './constants/index.js';
+import { brotli } from './operations/zip/index.js';
 
 export const readline = ReadLine.createInterface({
   input: stdin,
@@ -56,10 +56,10 @@ export const app = async (username) => {
           await hash(otherArgs);
           break;
         case 'compress':
-          await compress(otherArgs);
+          await brotli(otherArgs, 'compress');
           break;
         case 'decompress':
-          await decompress(otherArgs);
+          await brotli(otherArgs, 'decompress');
           break;
         case '.exit':
           stdout.write(getByeMsg(username));
