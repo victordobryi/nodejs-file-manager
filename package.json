@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-file-manager",
+  "version": "1.0.0",
+  "description": "nodejs-file-manager",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Viktar Kasilkin",
+  "license": "ISC"
+}
